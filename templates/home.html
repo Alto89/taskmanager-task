@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block head_title %}Task Manager {% endblock head_title %}| Home</title>
+    {% include 'snippets/css.html '%}
+</head>
+<body>
+{% include 'snippets/nav.html' %}
+<div class="conteiner">
+{% block content %}
+{% endblock content %}
+</div>
+<h1> {{ form.instance.name }} </h1>
+
+{% include 'snippets/js.html' %}
+</body>
+</html>

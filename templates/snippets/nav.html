@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Task manager</h1>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'tasks' %}">Tasks</a>
+    <a href="{% url 'user' %}">Profile</a>
+    {% else %}
+    <a href="{% url 'login' %}">Tasks</a>
+    <a href="{% url 'sign up' %}">Profile</a>
+    {% endif %}
+</div>
