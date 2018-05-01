@@ -1,0 +1,12 @@
+<div class="conteiner">
+{% block content %}
+</div>
+<div class="table-bordered">
+<ul>
+    <li>{{ obj }}<br/>
+        {{ obj.name }} {{ obj.creator }} {{ obj.created }} {{ obj.updated }}<button>Edit</button><button>Delete</button></li>
+
+    {% endfor %}
+</ul>
+</div>
+{% include 'snippets/js.html' %}

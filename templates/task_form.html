@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<ul>
+    {% for obj in object_list %}
+    <li>{{ obj }}<br/>
+        {{ obj.name }} {{ obj.creator }} {{ obj.created }} {{ obj.updated }}</li>
 
-</body>
-</html>
+    {% endfor %}
+</ul>
+<h3> Make Changes</h3>
+{% include 'snippets/form_snippet.html' with form=form %}

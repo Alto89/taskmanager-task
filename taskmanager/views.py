@@ -14,7 +14,8 @@ User = get_user_model()
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            return render(request, "home.html", {})
+            qs = Task.objects.all()
+            return render(request, "home.html", {'object_list': qs})
 
 class RegisterView(CreateView):
     form_class = RegisterForm
@@ -22,6 +23,7 @@ class RegisterView(CreateView):
     success_url = '/'
     
 class ProfileDetailView(LoginRequiredMixin, DetailView):
+    queryset = User.objects.all()
     template_name = 'taskmanager/user.html'
     
     def get_object(self):

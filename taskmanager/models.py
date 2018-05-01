@@ -16,6 +16,8 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+
 class Task(models.Model):
     STATUS_NEW = 1
     STATUS_IN_PROGRESS = 2
