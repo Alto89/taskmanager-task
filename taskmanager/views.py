@@ -15,7 +15,8 @@ class HomeView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
             qs = Task.objects.all()
-            return render(request, "home.html", {'object_list': qs})
+            sqs = SubTask.object.all()
+            return render(request, "home.html", {'object_list': qs, 'sub_list' : sqs})
 
 class RegisterView(CreateView):
     form_class = RegisterForm

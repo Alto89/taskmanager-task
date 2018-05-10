@@ -10,14 +10,7 @@
 {% block content %}
 {% endblock content %}
 </div>
-<ul>
-    {% for obj in object_list %}
-    <li>{{ obj }}<br/>
-        {{ obj.name }} {{ obj.creator }} {{ obj.created }} {{ obj.updated }}</li>
-
-    {% endfor %}
-</ul>
-
+{% include 'snippets/task_table.html' %}
 
 
 

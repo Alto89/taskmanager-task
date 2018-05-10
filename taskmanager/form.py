@@ -37,6 +37,7 @@ class TaskCreateForm(forms.ModelForm):
             'name',
             'description',
             'status',
+            'assigned',
         ]
 
 class SubTaskCreateForm(forms.ModelForm):
@@ -46,6 +47,7 @@ class SubTaskCreateForm(forms.ModelForm):
             'task',
             'description',
             'status',
+            'assigned',
         ]
         def __init__(self, user=None, *args, **kwargs):
             super(SubTaskForm, self).__init__(*args, **kwargs)

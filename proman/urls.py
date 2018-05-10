@@ -17,14 +17,15 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
 
-from taskmanager.views import HomeView, TaskListView, ProfileDetailView
+from taskmanager.views import HomeView, TaskListView, ProfileDetailView, TaskCreateView, SubTaskCreateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', LoginView.as_view(), name='login'),
     url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^tasks/', TaskListView.as_view(), name='tasks'),
-    url(r'^tasks/edit/', TaskListView.as_view(), name='detail'),
-    url(r'^user/', ProfileDetailView.as_view(), name='user'),
+    url(r'^tasks/$', TaskListView.as_view(), name='tasks'),
+    url(r'^tasks/create-task/$', TaskCreateView.as_view(), name='create'),
+    url(r'^tasks/create-subtask/$', SubTaskCreateView.as_view(), name='createsub'),
+    url(r'^user/$', ProfileDetailView.as_view(), name='user'),
     
 ]

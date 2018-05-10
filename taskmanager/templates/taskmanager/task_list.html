@@ -4,13 +4,8 @@
 {% block content %}
 {% endblock content %}
 </div>
-<div class="table-bordered">
-<ul>
-    {% for obj in object_list %}
-    <li>{{ obj }}<br/>
-        {{ obj.name }} {{ obj.creator }} {{ obj.created }} {{ obj.updated }}<button>Edit</button><button>Delete</button></li>
-
-    {% endfor %}
-</ul>
-</div>
+<form method="get" action="{% url 'create' %}">
+<button type="submit">Create Task</button>
+</form>
+{% include 'snippets/task_table.html' %}
 {% include 'snippets/js.html' %}

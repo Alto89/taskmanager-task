@@ -1,0 +1,29 @@
+<div class="table-bordered">
+          <table class="table" id="tasktable">
+             <tr class="nodrop">
+             <th>Task id</th>
+             <th>Subject</th>
+             <th>Description</th>
+             <th>Status</th>
+             <th>Assigned</th>
+             <th>Updated</th>
+             <th>Create Date</th>
+             <th>Action</th>
+             </tr>
+
+    {% for obj in object_list %}
+
+    <tr>
+        <td>{{ obj.id }}</td>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.description }}</td>
+        <td>{{ obj.get_status_display }}</td>
+        <td>{{ obj.assigned }}</td>
+        <td>{{ obj.updated }}</td>
+        <td>{{ obj.created }}</td>
+        <td><button>Edit</button><button>Delete</button></td>
+    </tr>
+
+    {% endfor %}
+
+</div>

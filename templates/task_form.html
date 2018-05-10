@@ -1,9 +1,4 @@
-<ul>
-    {% for obj in object_list %}
-    <li>{{ obj }}<br/>
-        {{ obj.name }} {{ obj.creator }} {{ obj.created }} {{ obj.updated }}</li>
+{% include 'snippets/css.html '%}
+{% include 'snippets/nav.html' %}
 
-    {% endfor %}
-</ul>
-<h3> Make Changes</h3>
 {% include 'snippets/form_snippet.html' with form=form %}
