@@ -1,14 +1,14 @@
-<div class="table-bordered">
+<div class="table">
           <table class="table" id="tasktable">
              <tr class="nodrop">
-             <th>Task id</th>
-             <th>Subject</th>
-             <th>Description</th>
-             <th>Status</th>
-             <th>Assigned</th>
-             <th>Updated</th>
-             <th>Create Date</th>
-             <th>Action</th>
+             <th scope="col">Task id</th>
+             <th scope="col">Subject</th>
+             <th scope="col">Description</th>
+             <th scope="col">Status</th>
+             <th scope="col">Assigned</th>
+             <th scope="col">Updated</th>
+             <th scope="col">Create Date</th>
+             <th scope="col">Action</th>
              </tr>
 
     {% for obj in object_list %}
@@ -21,7 +21,10 @@
         <td>{{ obj.assigned }}</td>
         <td>{{ obj.updated }}</td>
         <td>{{ obj.created }}</td>
-        <td><button>Edit</button><button>Delete</button></td>
+        <td><a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">View</a>
+            <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Edit</a>
+            <a href="#" class="btn btn-secondary btn-lg active red" role="button" aria-pressed="true">Delete</a>
+        </td>
     </tr>
 
     {% endfor %}

@@ -1,7 +1,7 @@
 {% if form.errors.non_field_errors %}
 {{ form.errors.non_field_errors }}
 {% endif %}
-<form method='POST'> {% csrf_token %}
+<form method='POST' class="form-group"> {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
 </form>
