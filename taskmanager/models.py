@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
+from django.core.urlresolvers import reverse
 
 User = settings.AUTH_USER_MODEL
 # Create your models here.
@@ -41,6 +42,9 @@ class Task(models.Model):
     
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.pk})
     
     @property
     def title(self):
@@ -58,6 +62,9 @@ class SubTask(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.PositiveSmallIntegerField(max_length=20, choices=Task.STATUSES, default=Task.STATUS_NEW)
     is_deleted = models.BooleanField(default=False)
+    
+    def get_absolute_url(self):
+        return reverse('subdetail', kwargs={'pk': self.pk})
     
 
 

@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from .models import Task, SubTask
-
+from django import template
 User=get_user_model()
+register = template.Library()
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -39,6 +40,18 @@ class TaskCreateForm(forms.ModelForm):
             'status',
             'assigned',
         ]
+
+        @register.filter(name='addclass')
+        def addclass(value, arg):
+            return value.as_widget(attrs={'class': arg})
+        
+        def __init__(self, *args, **kwargs):
+            super(TaskCreateForm, self).__init__(*args, **kwargs)
+            self.fields['name'].widget.attrs.update({'class': 'input-group mb-3'})
+
+
+
+
 
 class SubTaskCreateForm(forms.ModelForm):
     class Meta:

@@ -1,0 +1,13 @@
+{% include 'snippets/css.html '%}
+{% include 'snippets/nav.html' %}
+<div class="conteiner">
+{% block content %}
+{% endblock content %}
+</div>
+
+<h3> Make changes </h3>
+<form method='POST' class="form-group"> {% csrf_token %}
+    <div class="form-group">
+    {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-primary btn">Save</button>

@@ -1,0 +1,48 @@
+{% include 'snippets/css.html '%}
+{% include 'snippets/nav.html' %}
+<div class="conteiner">
+{% block content %}
+{% endblock content %}
+</div>
+
+<h3> Make changes </h3>
+{% include 'snippets/form_snippet.html' with form=form %}
+
+<form method="get" action="{% url 'createsub' %}">
+<button type="submit" class="btn btn-primary">Create Sub - Task</button>
+</form>
+  <div class="table">
+          <table class="table" id="tasktable">
+             <tr class="nodrop">
+             <th scope="col">Sub - Task id</th>
+             <th scope="col">Task</th>
+             <th scope="col">Description</th>
+             <th scope="col">Status</th>
+             <th scope="col">Assigned</th>
+             <th scope="col">Updated</th>
+             <th scope="col">Create Date</th>
+             <th scope="col">Action</th>
+             </tr>
+
+              {% for sub in subtasks %}
+
+
+
+    <tr>
+        <td>{{ sub.id }}</td>
+        <td>{{ sub.task }}</td>
+        <td>{{ sub.description }}</td>
+        <td>{{ sub.get_status_display }}</td>
+        <td>{{ sub.assigned }}</td>
+        <td>{{ sub.updated }}</td>
+        <td>{{ sub.created }}</td>
+        <td>
+            <a href="{{ sub.get_absolute_url }}" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
+            <a href="#" class="btn btn-danger" role="button" aria-pressed="true">Delete</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+
+</div>

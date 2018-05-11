@@ -21,12 +21,13 @@
         <td>{{ obj.assigned }}</td>
         <td>{{ obj.updated }}</td>
         <td>{{ obj.created }}</td>
-        <td><a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">View</a>
-            <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Edit</a>
-            <a href="#" class="btn btn-secondary btn-lg active red" role="button" aria-pressed="true">Delete</a>
+        <td><a href="{{ obj.get_absolute_url }}" class="btn btn-secondary" role="button" aria-pressed="true">View</a>
+            <a href="#" class="btn btn-danger" role="button" aria-pressed="true">Delete</a>
         </td>
     </tr>
 
     {% endfor %}
 
 </div>
+
+
