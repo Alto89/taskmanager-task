@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% include 'snippets/nav.html' %}
+{% include 'snippets/css.html '%}
+{% if form.errors %}
+<p> Your username password didn'nt match</p>
+{% endif %}
 
-</body>
-</html>
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>No acces</p>
+    {% else %}
+    <p> please log in</p>
+    {% endif%}
+{% endif %}
+
+<form method="post" action="{% url 'login'%}"
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.passsword.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+<input type="submit" value="register" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf#}
+
+

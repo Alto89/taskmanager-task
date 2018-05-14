@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% include 'snippets/nav.html' %}
+{% include 'snippets/css.html '%}
 
-</body>
-</html>
+<h1>Register</h1>
+<p> Did you need to <a href="{% url 'login'%}">Login</a></p>
+<div class="col-sm-6 col-sm-offset-3">
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register" />
+    <input type="hidden" name="next" value="{{ next }}"/>
+    <p> Did you need to <a href="{% url 'login'%}">Login</a></p>
+</form>
+</div>
