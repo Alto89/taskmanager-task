@@ -8,50 +8,49 @@ from django.http import Http404
 from django.urls import reverse_lazy
 from .form import TaskCreateForm, SubTaskCreateForm, RegisterForm
 from .models import Profile, Task, SubTask
+
 # Create your views here.
 
 User = get_user_model()
 
+
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            qs = Task.objects.all()
+            qs = Task.objects.filter(assigned=self.request.user)
             return render(request, "home.html", {'object_list': qs})
+
 
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'registration/register.html'
     success_url = '/'
-    
+
+
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     queryset = User.objects.all()
     template_name = 'taskmanager/user.html'
-    
+
     def get_object(self):
         username = self.kwargs.get("username")
         if username is None:
             raise Http404
         return get_object_or_404(User, username__iexact=username)
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(*args, **kwargs)
-        user = self.get_object()
-        #query = self.request.GET.get('q')  # todo:  wtf?
-
-        task_exists = SubTask.object.filter(assigned=user).exists()
-        qs = Task.objects.filter(assigned=self.get_object())
-        if task_exists and qs.exists():
-            context['tasks'] = qs
+        context['tasks'] = Task.objects.filter(assigned=self.request.user)
         return context
+
 
 class TaskListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Task.objects.filter(assigned=self.request.user)
 
+
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     form_class = TaskCreateForm
     template_name = 'taskmanager/detail-update.html'
-
 
     def get_context_data(self, *args, **kwargs):
         context = super(TaskUpdateView, self).get_context_data(*args, **kwargs)
@@ -65,11 +64,11 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 class SubTaskListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return SubTask.objects.filter(assigned=self.request.user)
-    
+
+
 class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskCreateForm
     template_name = 'task_form.html'
-
 
     def form_valid(self, form):
         instance = form.save(commit=False)
@@ -94,6 +93,7 @@ class SubTaskCreateView(LoginRequiredMixin, CreateView):
         context = super(SubTaskCreateView, self).get_context_data(*args, **kwargs)
         return context
 
+
 class SubTaskUpdateView(LoginRequiredMixin, UpdateView):
     form_class = SubTaskCreateForm
     template_name = 'taskmanager/detail-updatesub.html'
@@ -104,6 +104,7 @@ class SubTaskUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self):
         return SubTask.objects.filter(assigned=self.request.user)
+
 
 class TaskDelete(DeleteView):
     model = Task

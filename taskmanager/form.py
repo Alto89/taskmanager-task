@@ -2,8 +2,10 @@ from django import forms
 from django.contrib.auth import get_user_model
 from .models import Task, SubTask
 from django import template
-User=get_user_model()
+
+User = get_user_model()
 register = template.Library()
+
 
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -27,41 +29,30 @@ class RegisterForm(forms.ModelForm):
 
         if commit:
             user.save()
-            user.profile.send_activation_email()
         return user
 
-class TaskCreateForm(forms.ModelForm):
 
+class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields =[
+        fields = [
             'name',
             'description',
             'status',
             'assigned',
         ]
 
-        @register.filter(name='addclass')
-        def addclass(value, arg):
-            return value.as_widget(attrs={'class': arg})
-        
-        def __init__(self, *args, **kwargs):
-            super(TaskCreateForm, self).__init__(*args, **kwargs)
-            self.fields['name'].widget.attrs.update({'class': 'input-group mb-3'})
-
-
-
-
 
 class SubTaskCreateForm(forms.ModelForm):
     class Meta:
         model = SubTask
-        fields =[
+        fields = [
             'task',
             'description',
             'status',
             'assigned',
         ]
+
         def __init__(self, user=None, *args, **kwargs):
             super(SubTaskForm, self).__init__(*args, **kwargs)
-            self.fields['task'].queryset = Task.objects.filter(assigned=user)
+            self.fields['task'].queryset = Task.objects.filter(assigned=self.user.username)

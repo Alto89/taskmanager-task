@@ -2,7 +2,6 @@
 {% include 'snippets/css.html '%}
 
 <h1>Register</h1>
-<p> Did you need to <a href="{% url 'login'%}">Login</a></p>
 <div class="col-sm-6 col-sm-offset-3">
 <form method="post" action="{% url 'register' %}">
     {% csrf_token %}

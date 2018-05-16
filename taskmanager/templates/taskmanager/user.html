@@ -1,3 +1,10 @@
-{% include "task_form.html" %}
+{% include 'snippets/nav.html' %}
+{% include 'snippets/css.html '%}
 
-<h1>{% user.username %}</h1>
+<h1>{{ user.username }}</h1>
+
+{% for task in tasks %}
+<p>{{ task.subject }}</p>
+{% include 'snippets/js.html' %}
+
+{% endfor %}

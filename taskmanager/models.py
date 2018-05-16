@@ -13,6 +13,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    activated = models.BooleanField(default=False)
    
     def __str__(self):
         return self.user.username
@@ -65,6 +66,18 @@ class SubTask(models.Model):
     
     def get_absolute_url(self):
         return reverse('subdetail', kwargs={'pk': self.pk})
+
+
+
+def post_save_user_reciever(sender, instance, created, *args, **kwargs):
+    if created:
+        profile, is_created = Profile.objects.get_or_create(user=instance)
+        default_user_profile = Profile.objects.get_or_create(user__id=1)[0]
+        default_user_profile.followers.add(instance)
+        #default_user_profile.save()
+        profile.followers.add(default_user_profile.user)
+
+post_save.connect(post_save_user_reciever, sender=User)
     
 
 

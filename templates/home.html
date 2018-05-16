@@ -6,14 +6,15 @@
 </head>
 <body>
 {% include 'snippets/nav.html' %}
+{% if request.user.is_authenticated %}
 <div class="conteiner">
-{% block content %}
-{% endblock content %}
+    {% block content %}
+    {% endblock content %}
 </div>
 {% include 'snippets/task_table.html' %}
 
 
-
 {% include 'snippets/js.html' %}
 </body>
+{% endif %}
 </html>
